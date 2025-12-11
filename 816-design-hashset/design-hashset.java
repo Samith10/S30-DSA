@@ -1,47 +1,47 @@
 class MyHashSet {
-    int primary;
-    int secondary;
+    int buckets;
+    int bucketItems;
     boolean[][] storage;
 
     public MyHashSet() {
-        this.primary = 1000;
-        this.secondary = 1000;
-        storage = new boolean[primary][];
-    }
-
-    int getPrimary(int key){
-        return key%1000;
-    }
-
-    int getSecondary(int key){
-        return key/1000;
+        this.buckets = 1000;
+        this.bucketItems = 1000;
+        storage = new boolean[buckets][];
     }
     
+    int getBucket(int key){
+        return key%buckets;
+    }
+
+    int getBucketItem(int key){
+        return key/bucketItems;
+    }
+
     public void add(int key) {
-        int bucket = getPrimary(key);
-        int bucketItem = getSecondary(key);
+        int bucket = getBucket(key);
+        int bucketItem = getBucketItem(key);
         if(storage[bucket] == null){
             if(bucket == 0){
-                storage[bucket] = new boolean[secondary+1];
+                storage[bucket] = new boolean[bucketItems + 1];
             }
             else{
-            storage[bucket] = new boolean[secondary];
+            storage[bucket] = new boolean[bucketItems];
             }
         }
         storage[bucket][bucketItem] = true;
     }
     
     public void remove(int key) {
-        int bucket = getPrimary(key);
-        int bucketItem = getSecondary(key);
+        int bucket = getBucket(key);
+        int bucketItem = getBucketItem(key);
         if(storage[bucket] != null){
             storage[bucket][bucketItem] = false;
         }
     }
     
     public boolean contains(int key) {
-        int bucket = getPrimary(key);
-        int bucketItem = getSecondary(key);
+        int bucket = getBucket(key);
+        int bucketItem = getBucketItem(key);
         if(storage[bucket] == null){
             return false;
         }
