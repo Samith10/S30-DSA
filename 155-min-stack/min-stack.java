@@ -3,7 +3,7 @@ class MinStack {
     int min;
 
     public MinStack() {
-        s= new Stack<>();
+        s = new Stack<>();
         min = Integer.MAX_VALUE;
     }
     
@@ -13,7 +13,6 @@ class MinStack {
             min = val;
         }
         s.push(val);
-        
     }
     
     public void pop() {
@@ -24,7 +23,7 @@ class MinStack {
     }
     
     public int top() {
-       return s.peek();
+        return s.peek();
     }
     
     public int getMin() {
